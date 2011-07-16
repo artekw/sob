@@ -1,0 +1,38 @@
+#!/bin/sh
+
+. /etc/functions.sh
+
+start_service() {
+    /etc/init.d/$1 $2
+}
+
+find_device() {
+    local cfg="$1"
+    local hotdev="$2"
+    local action="$3"
+    local enabled
+    local device
+
+    config_get device "$cfg" device
+    config_get_bool enabled "$cfg" enabled 0
+    [ $enabled -lt 1 ] && return
+
+    grep -q "$hotdev" /proc/mounts || [ $action == "stop" ] || return
+
+    echo "target=$target device=$device"
+    [ "$device" = "$hotdev" ] && {
+        config_get target "$1" target
+        config_list_foreach "$1" "service" start_service $action
+    }
+}
+
+config_load fstab
+
+case "$ACTION" in
+    add)
+        config_foreach find_device mount "/dev/$DEVNAME" "start"
+        ;;
+    remove)
+        config_foreach find_device mount "/dev/$DEVNAME" "stop"
+        ;;
+esac

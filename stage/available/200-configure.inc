@@ -5,11 +5,18 @@
 # published by the Free Software Foundation; either version 2 of
 # the License, or (at your option) any later version.
 
-echo Symblink to dl and configuration ...
-	ln -sfv $P/dl $DL/dl;
-	cp -rv $P/conf/files-$step/* $DL/
-
-        echo CONFIG_TARGET_"$ARCH"=y > $DL/.config
+echo Symlink to dl and configuration ...
+	ln -sfv /home/artek/dev/openwrt/sources $DL/dl
+	cp -a $P/conf/files-$step/* $DL/
+	
+	echo CONFIG_HAVE_DOT_CONFIG=y > $DL/.config
+    echo CONFIG_TARGET_"$ARCH"=y >> $DL/.config
+	echo CONFIG_TARGET_"$ARCH"_Default=y >> $DL/.config
+	
 	for PK in $PKG; do
-        	echo CONFIG_"$PK"=y >> $DL/.config
+       	echo CONFIG_PACKAGE_"$PK"=y >> $DL/.config
 	done
+	for PKM in $PKGM; do
+       	echo CONFIG_PACKAGE_"$PKM"=m >> $DL/.config
+	done
+

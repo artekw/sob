@@ -1,0 +1,14 @@
+config samba
+        option 'name'                   'openwrt'
+        option 'workgroup'              'openwrt'
+        option 'description'    'openwrt'
+        option 'homes'                  '0'
+
+config sambashare
+        option 'name'                   'usb'
+        option 'path'                   '/mnt/hdd'
+        option 'read_only'              'no'
+        option 'guest_ok'               'yes'
+        option 'create_mask'    '0'
+        option 'dir_mask'               '0'
+        #option 'users'                 'abc'

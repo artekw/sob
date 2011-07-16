@@ -20,7 +20,8 @@ fi
 for target in `sort /tmp/sob-planned | uniq `; do
 	#check that $target is a valid target
 	if [[ -e ./conf/$target.conf ]]; then
-		nohup ./bot.sh $target > /dev/null &
+		./bot.sh $target > /dev/null &
+		echo "robi sie"	
 	fi
 done
 

@@ -30,7 +30,7 @@ fi
 for step in $TARGET; do
 
 	echo "************************"
-	echo "* " $step 
+	echo "* " $step
 	echo "************************"
 
 	#define target variable
@@ -43,9 +43,10 @@ for step in $TARGET; do
 		continue;
 	fi
 	for stage in ./stage/*.inc; do
-		echo "`basename $stage` <br>`date`<br>" > log/STATUS
+		echo "<b>WORKING:</b><br />$TARGET<br />`basename $stage` <br />`date`<br />" > log/STATUS
 		echo Including $stage
-		. $stage `tty -s && echo '| tee ' || echo '>'` log/$step-`date +%F`-`basename $stage` 2>&1
+		. $stage `tty -s && echo '| tee ' || echo '>'` log/$step-`date +%F`-`basename $stage`
+#		. $stage `tty -s && echo '| tee ' || echo '>'` log/$step-`date +%F`-`basename $stage` 2>&1
 		cd $P
 	done
 	echo "OFFLINE <br>`date`<br>" > log/STATUS

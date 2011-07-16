@@ -6,4 +6,14 @@
 # the License, or (at your option) any later version.
 
 echo Synch with server
-#	rsync -avz -e ssh $REPO_DIR/ remote.net:/remote/dir
+	ATOMEK_FTP=/media/atom/ftp
+	rm -rf $ATOMEK_FTP/openwrt/backfire/$ARCH/latest
+	mkdir -p $ATOMEK_FTP/openwrt/backfire/$ARCH/$REV
+	rsync -arv $REPO_DIR/* $ATOMEK_FTP/openwrt/backfire/$ARCH/$REV/
+	mkdir -p $ATOMEK_FTP/openwrt/backfire/$ARCH/latest
+	rsync -arv $REPO_DIR/* $ATOMEK_FTP/openwrt/backfire/$ARCH/latest/
+	rsync -arv $DL/.config $ATOMEK_FTP/openwrt/backfire/$ARCH/$REV/config.$REV
+echo Cleaning...
+#	rm -rf $REPO_DIR
+#	rm -rf $DL/files
+#	rm -rf $DL/bin

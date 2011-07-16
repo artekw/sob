@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# /etc/init.d/pure-ftpd disable
+# /etc/init.d/samba disable
+
+exit 0

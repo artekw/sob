@@ -1,0 +1,7 @@
+#!/bin/sh
+iw dev wlan0 station dump | awk '
+/Station/ { station=$2; }
+/rx\ bytes/ { rx=$NF }   
+/tx\ bytes/ { tx=$NF }
+/bitrate/ { printf("%s Rx:%d Tx:%d Bitrate: %d %s\n",station,rx,tx,$3,$4) }
+'

@@ -1,0 +1,21 @@
+config 'global' 'automount'
+        option 'from_fstab' '1'
+        option 'anon_mount' '1'
+
+config 'global' 'autoswap'
+        option 'from_fstab' '1'
+        option 'anon_swap' '0'
+
+config 'mount'
+        option 'options' 'rw'
+        option 'enabled_fsck' '0'
+        option 'fstype' 'auto'
+        option 'device' '/dev/sda1'
+        option 'target' '/mnt/hdd'
+        option 'enabled' '1'
+		list 'service' 'samba'
+		list 'service' 'pure-ftpd'
+
+config 'swap'
+        option 'device' '/dev/sda2'
+        option 'enabled' '0'
